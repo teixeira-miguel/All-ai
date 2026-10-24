@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090f">
+<title>ALL AI — Criação de Imagens</title>
+<style>
+:root{--bg:#09090f;--panel:#12121d;--panel2:#191927;--text:#f5f3ff;--muted:#a5a2ba;--purple:#9b6bff;--pink:#e56bff;--line:#2b2940;--good:#7ee7b5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#281444 0,transparent 42%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:1000px;margin:auto;padding:22px 16px 48px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:22px;letter-spacing:1.3px}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--purple),var(--pink));display:grid;place-items:center;color:white;box-shadow:0 0 30px #9b6bff55}.badge{font-size:11px;border:1px solid #4b356a;color:#d7c4ff;padding:6px 9px;border-radius:99px}
+.hero h1{font-size:clamp(30px,7vw,49px);line-height:1.05;letter-spacing:-1.7px;margin:0 0 12px}.gradient{background:linear-gradient(90deg,#c7aaff,#ff9bea);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);line-height:1.55;margin:0 0 24px;max-width:620px}
+.card{background:linear-gradient(180deg,#151522,#101019);border:1px solid var(--line);border-radius:20px;padding:18px;margin:18px 0;box-shadow:0 18px 60px #0003}.label{font-size:13px;color:#e0d9f7;font-weight:700;display:block;margin-bottom:10px}.prompt{width:100%;min-height:112px;resize:vertical;background:#0c0c14;border:1px solid #343148;border-radius:13px;padding:14px;color:var(--text);font:inherit;line-height:1.5;outline:none}.prompt:focus,select:focus{border-color:var(--purple)}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.field select{width:100%;padding:12px;border:1px solid #343148;border-radius:11px;background:#0c0c14;color:var(--text);font:inherit}.btn{border:0;border-radius:12px;padding:14px 18px;background:linear-gradient(100deg,var(--purple),#bd61ed);color:#fff;font-weight:800;font-size:15px;cursor:pointer;width:100%;margin-top:16px;box-shadow:0 8px 28px #9b6bff30}.btn:active{transform:scale(.99)}.btn.secondary{background:#242238;border:1px solid #39344f;box-shadow:none}.note{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 0 0}.status{display:none;border-radius:12px;padding:12px;background:#1a1829;color:#e7dcff;font-size:13px;line-height:1.5;margin-top:14px}.status.show{display:block}.preview{display:none;margin-top:18px}.preview img{display:block;max-width:100%;max-height:620px;object-fit:contain;margin:12px auto;border-radius:14px;border:1px solid var(--line)}.preview.show{display:block}.section-title{font-size:19px;margin:28px 0 12px}.styles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.style{background:#151522;border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center;color:#e9e3ff;font-size:13px}.style span{display:block;font-size:24px;margin-bottom:8px}.footer{color:#827e98;font-size:12px;text-align:center;margin-top:30px;line-height:1.6}a{color:#c6aaff}
+@media(min-width:700px){.wrap{padding:32px 24px 60px}.card{padding:24px}.hero p{font-size:16px}}
+@media(max-width:390px){.row{grid-template-columns:1fr}.styles{grid-template-columns:repeat(3,1fr)}.badge{font-size:10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">✦</div><span>ALL <span class="gradient">AI</span></span></div><span class="badge">BETA • PROTÓTIPO</span></header>
+<section class="hero">
+<h1>Suas ideias.<br><span class="gradient">Imagens sem fronteiras.</span></h1>
+<p>Um espaço para criar realismo, anime e arte digital. Escreva sua ideia, escolha um estilo e prepare sua imagem.</p>
+</section>
+<section class="card">
+<label class="label" for="prompt">Descreva a imagem que você quer criar</label>
+<textarea id="prompt" class="prompt" placeholder="Ex.: uma cidade futurista à noite, chuva refletindo luzes roxas, fotografia cinematográfica..."></textarea>
+<div class="row">
+<div class="field"><label class="label" for="style">Estilo</label><select id="style"><option>Realista</option><option>Anime</option><option>Arte digital</option><option>Fantasia</option><option>Retrato editorial</option><option>3D cinematográfico</option></select></div>
+<div class="field"><label class="label" for="ratio">Proporção</label><select id="ratio"><option value="square">Quadrada (1:1)</option><option value="portrait">Retrato (2:3)</option><option value="landscape">Paisagem (3:2)</option></select></div>
+</div>
+<button class="btn" id="generate">✦ Preparar criação</button>
+<div class="status" id="status" role="status"></div>
+<div class="preview" id="preview"><strong>Imagem escolhida para edição</strong><img id="uploadedImage" alt="Prévia da imagem enviada"><a id="download" download="all-ai-imagem.png">Salvar imagem</a></div>
+<p class="note">Este protótipo prepara seu pedido, mas ainda não gera imagens por conta própria. Para ativar a geração, será necessário conectar um modelo ou serviço de IA; serviços gratuitos podem ter limites.</p>
+</section>
+<h2 class="section-title">Explore estilos</h2>
+<div class="styles">
+<div class="style"><span>📷</span>Realismo</div><div class="style"><span>🎌</span>Anime</div><div class="style"><span>🪄</span>Fantasia</div>
+<div class="style"><span>🌆</span>Cinematográfico</div><div class="style"><span>🖌️</span>Arte digital</div><div class="style"><span>🧑‍🚀</span>Personagens</div>
+</div>
+<section class="card">
+<label class="label" for="upload">Quer visualizar uma imagem do seu celular?</label>
+<input id="upload" type="file" accept="image/*" style="width:100%;color:var(--muted)">
+<p class="note">A prévia é aberta localmente nesta página. O envio para um serviço externo só deve acontecer quando você escolher um serviço de geração.</p>
+</section>
+<div class="footer">ALL AI • Protótipo inicial<br>Use com responsabilidade e respeite direitos autorais, privacidade e consentimento.</div>
+</div>
+<script>
+const promptEl=document.getElementById('prompt'),statusEl=document.getElementById('status');
+document.getElementById('generate').addEventListener('click',()=>{
+ const p=promptEl.value.trim(),style=document.getElementById('style').value,ratio=document.getElementById('ratio').selectedOptions[0].text;
+ statusEl.classList.add('show');
+ if(!p){statusEl.textContent='Escreva uma descrição primeiro. Ex.: “um castelo flutuando entre nuvens ao pôr do sol, arte digital detalhada”.';promptEl.focus();return;}
+ statusEl.textContent='Seu pedido está pronto! Estilo: '+style+'. Proporção: '+ratio+'. A geração automática ainda não está conectada; este protótipo não enviou seu texto para nenhum servidor.';
+});
+document.getElementById('upload').addEventListener('change',e=>{
+ const file=e.target.files&&e.target.files[0];if(!file)return;
+ const url=URL.createObjectURL(file),img=document.getElementById('uploadedImage'),preview=document.getElementById('preview'),dl=document.getElementById('download');
+ img.src=url;dl.href=url;preview.classList.add('show');
+});
+</script>
+</body>
+</html>
